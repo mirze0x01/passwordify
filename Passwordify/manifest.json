@@ -1,27 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "Password Generator - Manager",
-  "version": "1.1",
-  "description": "Generate and store passwords locally. You can even generate your password with emojis, unicodes.",
+  "name": "Passwordify - Local Password Vault",
+  "version": "2.0.0",
+  "description": "Generate strong passwords and store them in an encrypted local vault.",
+  "minimum_chrome_version": "120",
   "icons": {
     "128": "icon128.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "alarms"
   ],
   "action": {
+    "default_title": "Open Passwordify",
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["passwords.html"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';"
+  }
 }

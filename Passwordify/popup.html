@@ -6,40 +6,81 @@
     <title>Passwordify</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Password Generator</h1>
-    <label>
-        Length: <input type="number" id="length" min="1" value="12">
-    </label>
-    <label>
-        <input type="checkbox" id="include-numbers">
-        Include Numbers
-    </label>
-    <label>
-        <input type="checkbox" id="include-special">
-        Include Special Characters
-    </label>
-    <label>
-        <input type="checkbox" id="include-uppercase">
-        Include Uppercase Letters
-    </label>
-    <label>
-        <input type="checkbox" id="include-lowercase">
-        Include Lowercase Letters
-    </label>
-    <label>
-        <input type="checkbox" id="include-emoji">
-        Use weird unicodes, emojis
-    </label>
-    <button id="generate">Generate Password</button>
-    <textarea id="password-output" readonly></textarea>
-    <button id="save-password">Save Password</button>
-    <button id="view-passwords">View Saved Passwords</button>
+<body class="popup-body">
+    <main class="popup-shell">
+        <header class="product-heading">
+            <span class="product-mark" aria-hidden="true">P</span>
+            <div>
+                <p class="eyebrow">Local-first security</p>
+                <h1>Passwordify</h1>
+            </div>
+        </header>
 
-    <footer>
-        <p><a href="https://azerium.pro/terms/passwordify" target="_blank">Terms of Service</a> | <a href="https://azerium.pro/privacypolicies/passwordify" target="_blank">Privacy Policy</a></p>
-    </footer>
+        <button id="view-passwords" class="vault-button" type="button">Open encrypted vault</button>
 
-    <script src="popup.js"></script>
+        <form id="generator-form" class="generator-form">
+            <div class="field-row">
+                <label for="length">Password length</label>
+                <input
+                    id="length"
+                    name="length"
+                    type="number"
+                    min="12"
+                    max="128"
+                    step="1"
+                    value="20"
+                    required
+                >
+            </div>
+
+            <details class="option-details">
+                <summary>Customize character types</summary>
+                <fieldset class="option-grid">
+                    <legend class="visually-hidden">Character types</legend>
+                    <label><input type="checkbox" id="include-lowercase" checked> Lowercase</label>
+                    <label><input type="checkbox" id="include-uppercase" checked> Uppercase</label>
+                    <label><input type="checkbox" id="include-numbers" checked> Numbers</label>
+                    <label><input type="checkbox" id="include-special" checked> Symbols</label>
+                    <label class="wide-option">
+                        <input type="checkbox" id="include-emoji">
+                        Emoji <span class="muted">(many sites reject these)</span>
+                    </label>
+                </fieldset>
+            </details>
+
+            <button id="generate" class="primary-button" type="submit">Generate securely</button>
+        </form>
+
+        <section class="generated-result" aria-labelledby="result-heading">
+            <div class="section-heading-row">
+                <h2 id="result-heading">Generated password</h2>
+                <span class="security-chip">Web Crypto</span>
+            </div>
+            <label class="visually-hidden" for="password-output">Generated password</label>
+            <input
+                id="password-output"
+                class="password-output"
+                type="text"
+                readonly
+                spellcheck="false"
+                autocomplete="off"
+            >
+            <div class="button-row">
+                <button id="copy-password" class="secondary-button" type="button">Copy</button>
+                <button id="save-password" class="secondary-button" type="button">Save in vault</button>
+            </div>
+            <label for="entry-name" class="compact-label">Vault label (optional)</label>
+            <input id="entry-name" type="text" maxlength="200" placeholder="Example: GitHub">
+        </section>
+
+        <p id="popup-status" class="status" role="status" aria-live="polite"></p>
+
+        <footer class="popup-footer">
+            <span>No host permissions or network access</span>
+            <a href="privacy.html" target="_blank" rel="noopener">Privacy</a>
+        </footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
 </body>
 </html>

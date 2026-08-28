@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwordify - Privacy and Security</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="privacy-body">
+    <main class="privacy-shell">
+        <header class="product-heading">
+            <span class="product-mark" aria-hidden="true">P</span>
+            <div>
+                <p class="eyebrow">Passwordify</p>
+                <h1>Privacy and security summary</h1>
+            </div>
+        </header>
+
+        <article class="privacy-card">
+            <h2>What stays on this device</h2>
+            <p>
+                The encrypted vault is stored in this browser profile using Chrome's local extension storage.
+                Passwordify has no host permissions, analytics, remote scripts, account system, or network API.
+            </p>
+
+            <h2>How the vault is protected</h2>
+            <ul>
+                <li>The master password is never stored.</li>
+                <li>PBKDF2-HMAC-SHA-256 with a random salt and 600,000 iterations derives a key.</li>
+                <li>AES-256-GCM encrypts and authenticates the complete vault with a fresh IV after every change.</li>
+                <li>The derived key and decrypted entries remain only in the unlocked vault page's memory.</li>
+                <li>The page locks after five minutes of inactivity and whenever its tab becomes hidden.</li>
+            </ul>
+
+            <h2>Temporary and clipboard data</h2>
+            <p>
+                Choosing “Save in vault” places the generated password in in-memory extension session storage while
+                the vault opens. Passwordify schedules cleanup after ten minutes and independently rejects an expired
+                handoff when it is read; a suspended device can delay the cleanup alarm. The handoff is removed only
+                after the unlocked vault saves it successfully. Copying a password sends it to the operating-system
+                clipboard; clipboard history or other software may retain it.
+            </p>
+
+            <h2>Limits of protection</h2>
+            <p>
+                Encryption protects a copied or offline browser profile when the master password is strong. It
+                cannot protect against malware, keyloggers, a compromised browser, malicious accessibility tools,
+                screenshots, or someone using the computer while the vault is unlocked. This project has not
+                received an independent professional security audit.
+            </p>
+
+            <h2>Deletion and recovery</h2>
+            <p>
+                While unlocked, use “Delete local data” and then “Delete vault” to erase Passwordify's local data.
+                While locked, use “Reset local vault.” You can also uninstall the extension and remove its stored
+                data. There is no password reset or recovery service; losing the master password means losing access
+                to the encrypted vault unless you reset it and start over.
+            </p>
+        </article>
+    </main>
+</body>
+</html>
